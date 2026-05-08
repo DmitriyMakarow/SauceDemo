@@ -1,21 +1,15 @@
 package tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.CartPage;
-import pages.ProductsPage;
-
-import java.util.HashMap;
 
 import static org.testng.Assert.assertEquals;
 
 public class CartTest extends BaseTest {
 
-    @Test
+    @Test (priority = 1,
+           description = "Проверка перехода в корзину из Products Page",
+           testName = "Проверка перехода в корзину из Product Page")
     public void checkCartPage() {
         loginPage.open();
         //Авторизация
@@ -27,7 +21,9 @@ public class CartTest extends BaseTest {
         assertEquals(checkCartTitle, "Your Cart");
     }
 
-    @Test
+    @Test (priority = 2,
+           description = "Проверка добавления товара в корзину",
+           testName = "Проверка добавления товара в корзину")
     public void checkCart() {
         //Авторизация
         loginPage.open();
@@ -41,7 +37,9 @@ public class CartTest extends BaseTest {
         assertEquals(text, "Sauce Labs Bolt T-Shirt");
     }
 
-    @Test
+    @Test (priority = 3,
+           description = "Проверка добавления и удаления товаров из корзины",
+           testName = "Проверка добавления и удаления товаров из корзины")
     public void checkAddRemoveProductsFromCart() {
         //Авторизация
         loginPage.open();
