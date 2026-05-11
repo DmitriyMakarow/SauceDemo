@@ -9,7 +9,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 
 public class LocatorTest extends BaseTest {
-    @Test
+    @Test (description = "Проверка локаторов в Sauce Demo (Login Page и Products Page)",
+            testName = "Проверка локаторов в Sauce Demo")
     public void checkLocator() {
         loginPage.open();
         driver.findElement(By.id("login_credentials"));

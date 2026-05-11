@@ -1,13 +1,15 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class CheckoutTest extends BaseTest {
 
-    @Test
+    @Test (description = "Проверка оформления заказа с позитивными данными",
+           testName = "Проверка оформления заказа с позитивными данными")
     public void checkCheckoutWithPositiveData() {
         //Авторизация
         loginPage.open();
@@ -27,37 +29,25 @@ public class CheckoutTest extends BaseTest {
         assertEquals(checkoutPage.getCompleteTitle(), "Thank you for your order!");
     }
 
-    @Test
-    public void checkCheckoutWithEmptyFirstName() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addProducts();
-        productsPage.clickCartLinkButton();
-        cartPage.clickCheckoutButton();
-        checkoutPage.isPageOpened();
-        checkoutPage.fillTextField("", "test", "000000");
-        assertEquals(checkoutPage.getErrorMessageCheckout(), "Error: First Name is required");
+    @DataProvider (name = "Тестовые данные для негативного оформления заказа")
+    public Object [] [] checkoutData() {
+        return new Object[][] {
+                {"", "test", "000000", "Error: First Name is required"},
+                {"test", "", "000000", "Error: Last Name is required"},
+                {"test", "test", "", "Error: Postal Code is required"},
+        };
     }
 
-    @Test
-    public void checkCheckoutWithEmptyLastName() {
+    @Test (dataProvider = "Тестовые данные для негативного оформления заказа",
+           description = "Проверка оформления заказа с негативными данными",
+           testName = "Проверка оформления заказа с негативными данными")
+    public void negativeCheckout (String firstName, String lastName, String postalCode, String errorMessageCheckout) {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.addProducts();
         productsPage.clickCartLinkButton();
         cartPage.clickCheckoutButton();
-        checkoutPage.fillTextField("test", "", "000000");
-        assertEquals(checkoutPage.getErrorMessageCheckout(), "Error: Last Name is required");
-    }
-
-    @Test
-    public void checkCheckoutWithEmptyPostalCode() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addProducts();
-        productsPage.clickCartLinkButton();
-        cartPage.clickCheckoutButton();
-        checkoutPage.fillTextField("test", "test", "");
-        assertEquals(checkoutPage.getErrorMessageCheckout(), "Error: Postal Code is required");
+        checkoutPage.fillTextField(firstName, lastName, postalCode);
+        assertEquals(checkoutPage.getErrorMessageCheckout(), errorMessageCheckout);
     }
 }

@@ -1,15 +1,13 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.CartPage;
-import pages.ProductsPage;
 
 import static org.testng.Assert.assertEquals;
 
 public class ProductsTest extends BaseTest {
 
-    @Test
+    @Test (description = "Проверка отображения количества товаров в Products Page",
+           testName = "Проверка отображения количества товаров в Products Page")
     public void checkProductsCount() {
         //Авторизация
         loginPage.open();
