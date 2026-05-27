@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +20,7 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открытие страницы Сheckout-step-one")
     public void open() {
         driver.get(BASE_URL + "/checkout-step-one.html");
     }
@@ -27,6 +29,7 @@ public class CheckoutPage extends BasePage {
         return driver.findElement(CHECKOUT_TITLE).getText();
     }
 
+    @Step("Оформление заказа с именем: '{firstName}', фамилией: '{lastName}' и индексом: '{postalCode}'")
     public void fillTextField(String firstName, String lastName, String postalCode) {
         driver.findElement(FIRSTNAME_FIELD).sendKeys(firstName);
         driver.findElement(LASTNAME_FIELD).sendKeys(lastName);
@@ -39,6 +42,7 @@ public class CheckoutPage extends BasePage {
         return driver.findElement(ERROR_MESSAGE_CHECKOUT).getText();
     }
 
+    @Step("Нажатие на кнопку 'Finish'")
     public void clickFinishButton() {
         driver.findElement(FINISH_BUTTON).click();
     }

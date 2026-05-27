@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +12,15 @@ import java.util.HashMap;
 public class LocatorTest extends BaseTest {
     @Test (description = "Проверка локаторов в Sauce Demo (Login Page и Products Page)",
             testName = "Проверка локаторов в Sauce Demo")
+    @Description("Проверка локаторов в Sauce Demo (Login Page и Products Page)")
+    @Epic("Regression")
+    @Feature("Checking Web elements")
+    @Story("Checking Locators on Login Page and Products Page")
+    @Severity(SeverityLevel.NORMAL)
+    @Link("https://www.saucedemo.com/")
+    @TmsLink("ITM-5")
+    @Issue("ITM-5")
+    @Owner("Makarov Dmitriy")
     public void checkLocator() {
         loginPage.open();
         driver.findElement(By.id("login_credentials"));

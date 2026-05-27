@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,6 +11,15 @@ public class CheckoutTest extends BaseTest {
 
     @Test (description = "Проверка оформления заказа с позитивными данными",
            testName = "Проверка оформления заказа с позитивными данными")
+    @Description("Проверка оформления заказа с позитивными данными")
+    @Epic("E2E")
+    @Feature("Checking your order in SauceDemo")
+    @Story("Positive Order")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://www.saucedemo.com/")
+    @TmsLink("ITM-5")
+    @Issue("ITM-5")
+    @Owner("Makarov Dmitriy")
     public void checkCheckoutWithPositiveData() {
         //Авторизация
         loginPage.open();
@@ -41,6 +51,15 @@ public class CheckoutTest extends BaseTest {
     @Test (dataProvider = "Тестовые данные для негативного оформления заказа",
            description = "Проверка оформления заказа с негативными данными",
            testName = "Проверка оформления заказа с негативными данными")
+    @Description("Проверка оформления заказа с негативными данными")
+    @Epic("E2E")
+    @Feature("Checking your order in SauceDemo")
+    @Story("Negative Order")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://www.saucedemo.com/")
+    @TmsLink("ITM-5")
+    @Issue("ITM-5")
+    @Owner("Makarov Dmitriy")
     public void negativeCheckout (String firstName, String lastName, String postalCode, String errorMessageCheckout) {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

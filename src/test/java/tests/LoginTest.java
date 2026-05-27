@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,6 +17,15 @@ public class LoginTest extends BaseTest {
 
     @Test (description = "Проверка входа в систему с позитивными кредами",
            testName = "Проверка входа в систему с позитивными кредами")
+    @Description("Проверка входа в систему с позитивными кредами")
+    @Epic("E2E")
+    @Feature("Login in to SauceDemo")
+    @Story("Positive Login")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://www.saucedemo.com/")
+    @TmsLink("ITM-5")
+    @Issue("ITM-5")
+    @Owner("Makarov Dmitriy")
     public void checkLoginWithPositiveCred() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -34,6 +44,15 @@ public class LoginTest extends BaseTest {
         @Test (dataProvider = "Тестовые данные для негативного логина",
                description = "Проверка входа в систему с негативными данными",
                testName = "Проверка входа в систему с негативными данными")
+        @Description("Проверка входа в систему с негативными данными")
+        @Epic("E2E")
+        @Feature("Login in to SauceDemo")
+        @Story("Negative Login")
+        @Severity(SeverityLevel.CRITICAL)
+        @Link("https://www.saucedemo.com/")
+        @TmsLink("ITM-5")
+        @Issue("ITM-5")
+        @Owner("Makarov Dmitriy")
         public void negativeLogin(String user, String password, String errorMessage) {
             loginPage.open();
             loginPage.login(user, password);
