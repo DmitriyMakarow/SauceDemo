@@ -8,10 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import pages.CartPage;
-import pages.CheckoutPage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.*;
 import utils.TestListener;
 
 import java.util.HashMap;
@@ -24,6 +21,8 @@ public class BaseTest {
     protected ProductsPage productsPage;
     protected CartPage cartPage;
     protected CheckoutPage checkoutPage;
+    protected CheckoutS2Page checkoutS2Page;
+    protected CheckoutCompletePage checkoutCompletePage;
 
     @Parameters({"browser"})
     @BeforeMethod (alwaysRun = true, description = "Настройка браузера")
@@ -49,6 +48,8 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
+        checkoutS2Page = new CheckoutS2Page(driver);
+        checkoutCompletePage = new CheckoutCompletePage(driver);
         iTestContext.setAttribute("driver", driver);
     }
 
