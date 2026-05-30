@@ -27,9 +27,7 @@ public class LoginTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkLoginWithPositiveCred() {
-        loginPage.open()
-                .isPageOpened()
-                .login("standard_user", "secret_sauce");
+        loginStep.auth("standard_user", "secret_sauce");
         assertEquals(productsPage.getTitle(), "Products");
     }
 
@@ -55,9 +53,7 @@ public class LoginTest extends BaseTest {
         @Issue("ITM-5")
         @Owner("Makarov Dmitriy")
         public void negativeLogin(String user, String password, String errorMessage) {
-            loginPage.open()
-                    .isPageOpened()
-                    .loginWithNegativeCred(user, password);
+            loginStep.authWithNegativeCred(user, password);
             assertEquals(loginPage.getErrorMessage(), errorMessage);
         }
     }

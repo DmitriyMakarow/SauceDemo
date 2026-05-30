@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import step.LoginStep;
 
 import static org.testng.Assert.assertEquals;
 
@@ -21,9 +22,7 @@ public class CartTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkCartPage() {
-        loginPage.open()
-                .isPageOpened()
-                .login("standard_user", "secret_sauce")
+        loginStep.auth("standard_user", "secret_sauce")
                 .isPageOpened()
                 .clickCartLinkButton();
         String checkCartTitle = cartPage.getCartTitle();
@@ -43,9 +42,7 @@ public class CartTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkCart() {
-        loginPage.open()
-                .isPageOpened()
-                .login("standard_user", "secret_sauce")
+        loginStep.auth("standard_user", "secret_sauce")
                 .isPageOpened()
                 .addToCart("Sauce Labs Bolt T-Shirt")
                 .clickCartLinkButton()
@@ -67,9 +64,7 @@ public class CartTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkAddRemoveProductsFromCart() {
-        loginPage.open()
-                .isPageOpened()
-                .login("standard_user", "secret_sauce")
+        loginStep.auth("standard_user", "secret_sauce")
                 .isPageOpened()
                 .addProducts()
                 .addProducts()

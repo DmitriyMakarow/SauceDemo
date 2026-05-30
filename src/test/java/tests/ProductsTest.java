@@ -20,9 +20,7 @@ public class ProductsTest extends BaseTest {
     @Owner("Makarov Dmitriy")
     public void checkProductsCount() {
         //Авторизация
-        loginPage.open()
-                .isPageOpened()
-                .login("standard_user", "secret_sauce")
+        loginStep.auth("standard_user", "secret_sauce")
                 .isPageOpened();
         int sizeProductsOnPage = productsPage.getCountProducts();
         assertEquals(sizeProductsOnPage, 6);

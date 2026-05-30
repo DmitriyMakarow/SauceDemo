@@ -4,6 +4,7 @@ import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import step.CheckoutStep;
 
 import static org.testng.Assert.assertEquals;
 
@@ -21,18 +22,13 @@ public class CheckoutTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkCheckoutWithPositiveData() {
-        loginPage.open()
-                .isPageOpened()
-                .login("standard_user", "secret_sauce")
+        loginStep.auth("standard_user", "secret_sauce")
                 .isPageOpened()
                 .addProducts()
                 .clickCartLinkButton()
                 .isPageOpened()
-                .clickCheckoutButton()
-                .isPageOpened()
-                .fillTextField("test", "test", "000000")
-                .isPageOpened()
-                .clickFinishButton();
+                .clickCheckoutButton();
+        checkoutStep.placingOrderWithPositiveData("test" ,"test","190000");
         assertEquals(checkoutCompletePage.getCompleteTitle(), "Thank you for your order!");
     }
 
@@ -58,16 +54,13 @@ public class CheckoutTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void negativeCheckout (String firstName, String lastName, String postalCode, String errorMessageCheckout) {
-        loginPage.open()
-                .isPageOpened()
-                .login("standard_user", "secret_sauce")
+        loginStep.auth("standard_user", "secret_sauce")
                 .isPageOpened()
                 .addProducts()
                 .clickCartLinkButton()
                 .isPageOpened()
-                .clickCheckoutButton()
-                .isPageOpened()
-                .fillTextFieldWithNegativeData(firstName, lastName, postalCode);
+                .clickCheckoutButton();
+        checkoutStep.placingOrderWithNegativeData(firstName, lastName, postalCode);
         assertEquals(checkoutPage.getErrorMessageCheckout(), errorMessageCheckout);
     }
 }

@@ -9,6 +9,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.*;
+import step.CheckoutStep;
+import step.LoginStep;
 import utils.TestListener;
 
 import java.util.HashMap;
@@ -17,12 +19,14 @@ import java.util.HashMap;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected LoginPage loginPage;
     protected ProductsPage productsPage;
     protected CartPage cartPage;
     protected CheckoutPage checkoutPage;
     protected CheckoutS2Page checkoutS2Page;
     protected CheckoutCompletePage checkoutCompletePage;
+    protected LoginStep loginStep;
+    protected LoginPage loginPage;
+    protected CheckoutStep checkoutStep;
 
     @Parameters({"browser"})
     @BeforeMethod (alwaysRun = true, description = "Настройка браузера")
@@ -44,12 +48,14 @@ public class BaseTest {
             driver = new EdgeDriver();
             driver.manage().window().maximize();
         }
-        loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
         checkoutS2Page = new CheckoutS2Page(driver);
         checkoutCompletePage = new CheckoutCompletePage(driver);
+        loginStep = new LoginStep(driver);
+        loginPage = new LoginPage(driver);
+        checkoutStep = new CheckoutStep(driver);
         iTestContext.setAttribute("driver", driver);
     }
 
