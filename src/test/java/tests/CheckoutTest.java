@@ -22,7 +22,7 @@ public class CheckoutTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkCheckoutWithPositiveData() {
-        loginStep.auth("standard_user", "secret_sauce")
+        loginStep.auth(user, password)
                 .isPageOpened()
                 .addProducts()
                 .clickCartLinkButton()
@@ -54,7 +54,7 @@ public class CheckoutTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void negativeCheckout (String firstName, String lastName, String postalCode, String errorMessageCheckout) {
-        loginStep.auth("standard_user", "secret_sauce")
+        loginStep.auth(user, password)
                 .isPageOpened()
                 .addProducts()
                 .clickCartLinkButton()

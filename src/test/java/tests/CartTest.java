@@ -22,7 +22,7 @@ public class CartTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkCartPage() {
-        loginStep.auth("standard_user", "secret_sauce")
+        loginStep.auth(user, password)
                 .isPageOpened()
                 .clickCartLinkButton();
         String checkCartTitle = cartPage.getCartTitle();
@@ -42,7 +42,7 @@ public class CartTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkCart() {
-        loginStep.auth("standard_user", "secret_sauce")
+        loginStep.auth(user, password)
                 .isPageOpened()
                 .addToCart("Sauce Labs Bolt T-Shirt")
                 .clickCartLinkButton()
@@ -64,7 +64,7 @@ public class CartTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkAddRemoveProductsFromCart() {
-        loginStep.auth("standard_user", "secret_sauce")
+        loginStep.auth(user, password)
                 .isPageOpened()
                 .addProducts()
                 .addProducts()
