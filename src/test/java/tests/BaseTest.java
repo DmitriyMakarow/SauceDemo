@@ -12,6 +12,7 @@ import org.testng.annotations.*;
 import pages.*;
 import step.CheckoutStep;
 import step.LoginStep;
+import utils.PropertyReader;
 import utils.TestListener;
 
 import java.util.HashMap;
@@ -28,8 +29,8 @@ public class BaseTest {
     protected LoginStep loginStep;
     protected LoginPage loginPage;
     protected CheckoutStep checkoutStep;
-    protected String user = System.getProperty("user");
-    protected String password = System.getProperty("password");
+    protected String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    protected String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @Parameters({"browser"})
     @BeforeMethod (alwaysRun = true, description = "Настройка браузера")
