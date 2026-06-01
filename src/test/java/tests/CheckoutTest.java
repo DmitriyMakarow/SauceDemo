@@ -4,6 +4,7 @@ import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import step.CheckoutStep;
 
 import static org.testng.Assert.assertEquals;
 
@@ -21,22 +22,14 @@ public class CheckoutTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkCheckoutWithPositiveData() {
-        //Авторизация
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        //Добавление товара
-        productsPage.addProducts();
-        //Переход в корзину
-        productsPage.clickCartLinkButton();
-        //Переход к странице оформления заказа
-        cartPage.clickCheckoutButton();
-        checkoutPage.isPageOpened();
-        //Заполнение полей валидными данными
-        checkoutPage.fillTextField("test", "test", "000000");
-        //Нажатие на кнопку финиш
-        checkoutPage.clickFinishButton();
-        //Проверка, что заказ оформлен
-        assertEquals(checkoutPage.getCompleteTitle(), "Thank you for your order!");
+        loginStep.auth(user, password)
+                .isPageOpened()
+                .addProducts()
+                .clickCartLinkButton()
+                .isPageOpened()
+                .clickCheckoutButton();
+        checkoutStep.placingOrderWithPositiveData("test" ,"test","190000");
+        assertEquals(checkoutCompletePage.getCompleteTitle(), "Thank you for your order!");
     }
 
     @DataProvider (name = "Тестовые данные для негативного оформления заказа")
@@ -61,12 +54,13 @@ public class CheckoutTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void negativeCheckout (String firstName, String lastName, String postalCode, String errorMessageCheckout) {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addProducts();
-        productsPage.clickCartLinkButton();
-        cartPage.clickCheckoutButton();
-        checkoutPage.fillTextField(firstName, lastName, postalCode);
+        loginStep.auth(user, password)
+                .isPageOpened()
+                .addProducts()
+                .clickCartLinkButton()
+                .isPageOpened()
+                .clickCheckoutButton();
+        checkoutStep.placingOrderWithNegativeData(firstName, lastName, postalCode);
         assertEquals(checkoutPage.getErrorMessageCheckout(), errorMessageCheckout);
     }
 }

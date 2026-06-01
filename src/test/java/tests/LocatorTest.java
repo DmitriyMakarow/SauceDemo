@@ -28,7 +28,7 @@ public class LocatorTest extends BaseTest {
         driver.findElement(By.className("form_group"));
         driver.findElement(By.tagName("h4"));
         //Авторизация
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         driver.findElement(By.linkText("Sauce Labs Fleece Jacket"));
         driver.findElement(By.partialLinkText("Backpack"));
         //xpath

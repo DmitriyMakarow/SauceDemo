@@ -27,16 +27,15 @@ public class LoginTest extends BaseTest {
     @Issue("ITM-5")
     @Owner("Makarov Dmitriy")
     public void checkLoginWithPositiveCred() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginStep.auth(user, password);
         assertEquals(productsPage.getTitle(), "Products");
     }
 
         @DataProvider(name = "Тестовые данные для негативного логина")
         public Object[] [] loginData() {
             return new Object[][] {
-                    {"", "secret_sauce", "Epic sadface: Username is required"},
-                    {"standard_user", "", "Epic sadface: Password is required"},
+                    {"", password, "Epic sadface: Username is required"},
+                    {user, "", "Epic sadface: Password is required"},
                     {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
             };
     }
@@ -54,8 +53,7 @@ public class LoginTest extends BaseTest {
         @Issue("ITM-5")
         @Owner("Makarov Dmitriy")
         public void negativeLogin(String user, String password, String errorMessage) {
-            loginPage.open();
-            loginPage.login(user, password);
+            loginStep.authWithNegativeCred(user, password);
             assertEquals(loginPage.getErrorMessage(), errorMessage);
         }
     }

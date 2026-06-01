@@ -6,12 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import pages.CartPage;
-import pages.CheckoutPage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.*;
+import step.CheckoutStep;
+import step.LoginStep;
+import utils.PropertyReader;
 import utils.TestListener;
 
 import java.util.HashMap;
@@ -20,10 +21,16 @@ import java.util.HashMap;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected LoginPage loginPage;
     protected ProductsPage productsPage;
     protected CartPage cartPage;
     protected CheckoutPage checkoutPage;
+    protected CheckoutS2Page checkoutS2Page;
+    protected CheckoutCompletePage checkoutCompletePage;
+    protected LoginStep loginStep;
+    protected LoginPage loginPage;
+    protected CheckoutStep checkoutStep;
+    protected String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    protected String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @Parameters({"browser"})
     @BeforeMethod (alwaysRun = true, description = "Настройка браузера")
@@ -40,15 +47,22 @@ public class BaseTest {
             options.addArguments("--disable-popup-blocking");
             options.addArguments("--disable-infobars");
             options.addArguments("--start-maximized");
+            options.addArguments("--headless");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless");
+            driver = new EdgeDriver(options);
             driver.manage().window().maximize();
         }
-        loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
+        checkoutS2Page = new CheckoutS2Page(driver);
+        checkoutCompletePage = new CheckoutCompletePage(driver);
+        loginStep = new LoginStep(driver);
+        loginPage = new LoginPage(driver);
+        checkoutStep = new CheckoutStep(driver);
         iTestContext.setAttribute("driver", driver);
     }
 
